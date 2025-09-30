@@ -1,26 +1,11 @@
 function setup() {
   // Create a canvas that fills the entire browser window
-  createCanvas(400,400);
-  background('red');
-  
-  let x=300
-  let y=300
-  let d=300;
-
-
-
-  circle(x,y,300);
-  circle(x,y,200);
-  circle(x,y,100);
-  circle(x,y,50);
-
-
-
+  createCanvas(windowWidth, windowHeight);
 }
 
-
 function draw() {
-circle(123,234,500);
+ background(255,0,50,60);
+ circle(123,234,500);
 circle(mouseX,mouseY,500);
 
 }
