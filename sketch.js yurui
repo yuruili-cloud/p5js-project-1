@@ -1,0 +1,63 @@
+// 交互式绘图程序
+let rectX, rectY, rectW, rectH;
+let drawHistory = [];
+
+function setup() {
+  createCanvas(800, 600);
+  rectMode(CENTER);
+  background(30);
+  
+  rectX = width/2;
+  rectY = height/2;
+  rectW = 180;
+  rectH = 120;
+}
+
+function draw() {
+  // 绘制交互矩形
+  if (checkMouseOverRect()) {
+    fill(255, 255, 0);
+  } else {
+    fill(100, 200, 100);
+  }
+  noStroke();
+  rect(rectX, rectY, rectW, rectH);
+  
+  // 绘制说明文字
+  fill(255);
+  textSize(14);
+  text("按住鼠标拖动绘制 | 按C键清空", 20, 30);
+  text("鼠标悬停矩形变色", 20, 50);
+}
+
+function checkMouseOverRect() {
+  return (mouseX > rectX - rectW/2) && 
+         (mouseX < rectX + rectW/2) && 
+         (mouseY > rectY - rectH/2) && 
+         (mouseY < rectY + rectH/2);
+}
+
+function mouseDragged() {
+  // 只在矩形外绘制
+  if (!checkMouseOverRect()) {
+    fill(255, 200, 0, 150);
+    noStroke();
+    ellipse(mouseX, mouseY, 15, 15);
+    drawHistory.push({x: mouseX, y: mouseY});
+  }
+}
+
+function keyPressed() {
+  if (key === 'c' || key === 'C') {
+    background(30);
+    drawHistory = [];
+  }
+}
+
+function mousePressed() {
+  // 点击矩形时随机改变大小
+  if (checkMouseOverRect()) {
+    rectW = random(100, 250);
+    rectH = random(80, 200);
+  }
+}
